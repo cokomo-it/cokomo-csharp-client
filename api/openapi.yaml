@@ -1,0 +1,358 @@
+openapi: 3.0.1
+info:
+  description: "## 👉 [Please see the CoKoMo documentation for more information.](https://cokomo-it.de/docs/start/api/documentation/)"
+  title: Cokomo Public Api
+  version: v1
+servers:
+- url: /
+paths:
+  /CompetenceBase/{id}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CompetenceBase'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompetenceBase'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CompetenceBase'
+          description: Success
+      tags:
+      - CompetenceBase
+  /CompetenceBase/{id}/neighbours:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: depth
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Neighbour'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Neighbour'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Neighbour'
+          description: Success
+      tags:
+      - CompetenceBase
+  /CompetenceBase/{id}/details:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CompetenceBase'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompetenceBase'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CompetenceBase'
+          description: Success
+      tags:
+      - CompetenceBase
+  /LearningGoal/{id}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/LearningGoal'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LearningGoal'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LearningGoal'
+          description: Success
+      tags:
+      - LearningGoal
+  /LearningGoal/{id}/details:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/LearningGoal'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LearningGoal'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LearningGoal'
+          description: Success
+      tags:
+      - LearningGoal
+  /Metamodel:
+    get:
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Metamodel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metamodel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Metamodel'
+          description: Success
+      tags:
+      - Metamodel
+components:
+  schemas:
+    CompetenceBase:
+      additionalProperties: false
+      example:
+        id: id
+        shortDescription: shortDescription
+        title: title
+        type: type
+      properties:
+        id:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        shortDescription:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+      type: object
+    CompetenceBaseType:
+      additionalProperties: false
+      example:
+        description: description
+        id: id
+        abbreviation: abbreviation
+        title: title
+      properties:
+        id:
+          nullable: true
+          type: string
+        abbreviation:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+      type: object
+    CompetenceLevel:
+      additionalProperties: false
+      example:
+        level: 0
+        id: id
+        type: type
+        title: title
+      properties:
+        id:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        level:
+          format: int32
+          type: integer
+      type: object
+    EdgeType:
+      additionalProperties: false
+      example:
+        description: description
+        id: id
+        title: title
+        abbreviation: abbreviation
+      properties:
+        id:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        abbreviation:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+      type: object
+    LearningGoal:
+      additionalProperties: false
+      example:
+        associatedCompetenceLevel:
+          level: 0
+          id: id
+          type: type
+          title: title
+        underlyingCompetenceBase:
+          id: id
+          shortDescription: shortDescription
+          title: title
+          type: type
+        id: id
+        type: type
+      properties:
+        id:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+        underlyingCompetenceBase:
+          $ref: '#/components/schemas/CompetenceBase'
+        associatedCompetenceLevel:
+          $ref: '#/components/schemas/CompetenceLevel'
+      type: object
+    Metamodel:
+      additionalProperties: false
+      example:
+        edgeTypes:
+        - description: description
+          id: id
+          title: title
+          abbreviation: abbreviation
+        - description: description
+          id: id
+          title: title
+          abbreviation: abbreviation
+        competenceBaseTypes:
+        - description: description
+          id: id
+          abbreviation: abbreviation
+          title: title
+        - description: description
+          id: id
+          abbreviation: abbreviation
+          title: title
+      properties:
+        competenceBaseTypes:
+          items:
+            $ref: '#/components/schemas/CompetenceBaseType'
+          nullable: true
+          type: array
+        edgeTypes:
+          items:
+            $ref: '#/components/schemas/EdgeType'
+          nullable: true
+          type: array
+      type: object
+    Neighbour:
+      additionalProperties: false
+      example:
+        neighbours:
+        - null
+        - null
+        id: id
+        shortDescription: shortDescription
+        title: title
+        type: type
+        relation:
+          id: id
+          type: type
+          direction: direction
+      properties:
+        id:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        shortDescription:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+        relation:
+          $ref: '#/components/schemas/NeighbourEdge'
+        neighbours:
+          items:
+            $ref: '#/components/schemas/Neighbour'
+          nullable: true
+          type: array
+      type: object
+    NeighbourEdge:
+      additionalProperties: false
+      example:
+        id: id
+        type: type
+        direction: direction
+      properties:
+        id:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+        direction:
+          nullable: true
+          type: string
+      type: object
+

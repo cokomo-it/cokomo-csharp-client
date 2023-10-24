@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo><!-- setting GenerateAssemblyInfo to false causes this bug https://github.com/dotnet/project-system/issues/3934 -->
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>CoKoMo.CoKoMoApiClient</AssemblyName>
+    <PackageId>CoKoMo.CoKoMoApiClient</PackageId>
+    <OutputType>Library</OutputType>
+    <Authors>cokomo-team@haw-hamburg.de</Authors>
+    <Company>CoKoMo Project cokomo-it.de</Company>
+    <AssemblyTitle>OpenAPI Library</AssemblyTitle>
+    <Description>A library generated from a OpenAPI doc</Description>
+    <Copyright>No Copyright</Copyright>
+    <RootNamespace>CoKoMo.CoKoMoApiClient</RootNamespace>
+    <Version>1.0.0</Version>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CoKoMo.CoKoMoApiClient.xml</DocumentationFile>
+    <PackageLicenseExpression>CC0 1.0 Universal</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/cokomo-it/cokomo-csharp-client.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Update</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="Polly" Version="7.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+</Project>
